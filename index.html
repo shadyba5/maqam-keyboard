@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>كيبورد المقامات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: warm, crafted, quiet — an instrument, not a dashboard
+   IDEA: a Damascene inlaid oud board — walnut wood with mother-of-pearl keys
+   PICTURE: eight large pearl keys in a carved wooden frame, the quarter-tone keys marked with a copper ring
+   COLOUR and TYPE: walnut #2b1a12 dominant, pearl #f3efe6 support, copper #c8743a accent; Reem Kufi titles, Noto Naskh body
+   LAYOUT: modest title, maqam chips, the key board fills the first screen, controls beneath */
+:root{color-scheme:light dark;--bg:light-dark(#efe6d8,#140c08);--wood:light-dark(#3a2418,#2b1a12);--wood2:light-dark(#4b2f20,#3a2418);--ink:light-dark(#2b1a12,#f3efe6);--muted:light-dark(#6b5446,#b9a593);--pearl:#f6f2ea;--pearl2:#ddd5c6;--cu:#c8743a;--cu2:#e39a5e}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Noto Naskh Arabic",Tahoma,sans-serif;overflow-x:clip}
+.band{padding:clamp(20px,3.5vw,48px) max(5vw,16px);max-width:1240px;margin:auto}
+h1{font:700 clamp(32px,5vw,48px)/1.05 "Reem Kufi",sans-serif;margin:0 0 6px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 20px;font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{font:600 16px "Noto Naskh Arabic",sans-serif;min-height:44px;padding:4px 18px;border-radius:22px;border:1.5px solid var(--muted);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--cu);border-color:var(--cu);color:#fff}
+.chip:focus-visible,.k:focus-visible,.btn:focus-visible{outline:3px solid var(--cu2);outline-offset:3px}
+.board{background:linear-gradient(180deg,var(--wood2),var(--wood));border-radius:22px;padding:clamp(14px,2.5vw,28px);box-shadow:0 18px 40px -18px #0009,inset 0 1px 0 #ffffff1f;position:relative}
+.board::before{content:"";position:absolute;inset:8px;border-radius:16px;border:1px dashed #c8743a55;pointer-events:none}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;color:var(--pearl);margin:0 4px 14px}
+.head b{font:700 clamp(24px,3.5vw,32px)/1.1 "Reem Kufi",sans-serif}
+.head span{color:#d9c7b4;font-size:15px}
+.keys{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:clamp(5px,1vw,12px);direction:ltr;touch-action:none;user-select:none;-webkit-user-select:none}
+.k{position:relative;height:clamp(220px,42vh,340px);border:0;border-radius:12px 12px 16px 16px;background:linear-gradient(180deg,var(--pearl) 0%,var(--pearl2) 100%);box-shadow:0 6px 0 #00000055,inset 0 -10px 18px #0000001a,inset 0 2px 0 #fff;color:#2b1a12;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 2px 14px;font:inherit;transition:transform .06s,box-shadow .06s;-webkit-tap-highlight-color:transparent}
+.k.q{background:linear-gradient(180deg,#fbe3cf 0%,#e9c3a1 100%)}
+.k.q::after{content:"";position:absolute;top:14px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;border:3px solid var(--cu)}
+.k.on{transform:translateY(5px);box-shadow:0 1px 0 #00000055,inset 0 -4px 12px #0000002a,0 0 0 3px var(--cu2)}
+.k .ar{font:700 clamp(15px,2.4vw,24px)/1.1 "Reem Kufi",sans-serif;direction:rtl}
+.k .la{font-size:clamp(13px,1.6vw,15px);color:#6b5446;direction:ltr}
+.k .kb{margin-top:8px;font:600 13px/1 system-ui,sans-serif;border:1px solid #6b544666;border-radius:6px;padding:4px 7px;color:#6b5446}
+.k .tag{position:absolute;top:40px;font-size:13px;color:var(--cu);font-weight:600}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:20px}
+.btn{font:600 16px "Noto Naskh Arabic",sans-serif;min-height:44px;padding:4px 18px;border-radius:12px;border:0;background:var(--wood);color:var(--pearl);cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--muted)}
+.oct{display:flex;align-items:center;gap:8px;margin-inline-start:auto}
+.oct output{min-width:3ch;text-align:center;font-weight:600}
+.note{color:var(--muted);font-size:14px;margin-top:16px}
+@media(max-width:600px){.k{height:clamp(200px,46vh,300px)}.k .kb{display:none}.k .tag{top:38px;font-size:13px}.oct{margin-inline-start:0}}
+@media(prefers-reduced-motion:reduce){.k{transition:none}}
+</style>
+</head>
+<body>
+<main class="band">
+  <h1>كيبورد المقامات</h1>
+  <p class="sub">ثماني نغمات لكل مقام، مع أرباع التون الحقيقية وصوت وتر مقروص قريب من العود.</p>
+  <div class="chips" id="chips" role="group" aria-label="اختر المقام"></div>
+  <section class="board">
+    <div class="head"><b id="mname"></b><span id="mdesc"></span></div>
+    <div class="keys" id="keys"></div>
+  </section>
+  <div class="ctl">
+    <button class="btn" id="scaleUp">اعزف السلّم صعودًا</button>
+    <button class="btn alt" id="scaleDown">نزولًا</button>
+    <div class="oct" aria-label="الأوكتاف">
+      <button class="btn alt" id="octDown" aria-label="أوكتاف أخفض">−</button>
+      <output id="octOut">0</output>
+      <button class="btn alt" id="octUp" aria-label="أوكتاف أعلى">+</button>
+    </div>
+  </div>
+  <p class="note">لوحة المفاتيح: A S D F G H J K أو الأرقام 1–8. المفاتيح ذات الحلقة النحاسية هي أرباع التون (نصف بيمول).</p>
+</main>
+<script>
+{
+const M=[
+ {id:'saba',n:'صبا',d:'قرار ري · غمّاز فا',f:146.83,s:[0,3,6,8,14,16,20,22],g:2,
+  ar:['ري','مي½♭','فا','صول♭','لا','سي♭','دو','ري♭'],la:['D','E½♭','F','G♭','A','B♭','C','D♭']},
+ {id:'sikah',n:'سيكاه',d:'قرار مي½♭ · غمّاز صول',f:160.12,s:[0,3,7,11,14,17,21,24],g:2,
+  ar:['مي½♭','فا','صول','لا','سي½♭','دو','ري','مي½♭'],la:['E½♭','F','G','A','B½♭','C','D','E½♭']},
+ {id:'huzam',n:'هزام',d:'قرار مي½♭ · غمّاز صول',f:160.12,s:[0,3,7,9,15,17,21,24],g:2,
+  ar:['مي½♭','فا','صول','لا♭','سي','دو','ري','مي½♭'],la:['E½♭','F','G','A♭','B','C','D','E½♭']},
+ {id:'rast',n:'راست',d:'قرار دو · غمّاز صول',f:130.81,s:[0,4,7,10,14,18,21,24],g:4,
+  ar:['دو','ري','مي½♭','فا','صول','لا','سي½♭','دو'],la:['C','D','E½♭','F','G','A','B½♭','C']},
+ {id:'bayati',n:'بياتي',d:'قرار ري · غمّاز صول',f:146.83,s:[0,3,6,10,14,16,20,24],g:3,
+  ar:['ري','مي½♭','فا','صول','لا','سي♭','دو','ري'],la:['D','E½♭','F','G','A','B♭','C','D']},
+ {id:'hijaz',n:'حجاز',d:'قرار ري · غمّاز صول',f:146.83,s:[0,2,8,10,14,16,20,24],g:3,
+  ar:['ري','مي♭','فا♯','صول','لا','سي♭','دو','ري'],la:['D','E♭','F♯','G','A','B♭','C','D']},
+ {id:'kurd',n:'كرد',d:'قرار ري · غمّاز صول',f:146.83,s:[0,2,6,10,14,16,20,24],g:3,
+  ar:['ري','مي♭','فا','صول','لا','سي♭','دو','ري'],la:['D','E♭','F','G','A','B♭','C','D']},
+ {id:'nahawand',n:'نهاوند',d:'قرار دو · غمّاز صول',f:130.81,s:[0,4,6,10,14,16,22,24],g:4,
+  ar:['دو','ري','مي♭','فا','صول','لا♭','سي','دو'],la:['C','D','E♭','F','G','A♭','B','C']},
+ {id:'ajam',n:'عجم',d:'قرار دو · غمّاز صول',f:130.81,s:[0,4,8,10,14,18,22,24],g:4,
+  ar:['دو','ري','مي','فا','صول','لا','سي','دو'],la:['C','D','E','F','G','A','B','C']}
+];
+const KB=['a','s','d','f','g','h','j','k'];
+let cur=M[0],oct=0,ctx=null;const cache=new Map();
+try{const h=location.hash.slice(1);const m=M.find(x=>x.id===h)||M.find(x=>x.id===localStorage.getItem('maqam'));if(m)cur=m}catch(e){}
+
+const chips=document.getElementById('chips'),keys=document.getElementById('keys');
+chips.innerHTML=M.map(m=>`<button class="chip" data-id="${m.id}" aria-pressed="false">${m.n}</button>`).join('');
+
+function render(){
+  document.getElementById('mname').textContent='مقام '+cur.n;
+  document.getElementById('mdesc').textContent=cur.d;
+  for(const b of chips.children)b.setAttribute('aria-pressed',b.dataset.id===cur.id);
+  keys.innerHTML=cur.s.map((q,i)=>{
+    const quarter=cur.la[i].includes('½');
+    const tag=i===0?'قرار':i===cur.g?'غمّاز':'';
+    return `<button class="k${quarter?' q':''}" data-i="${i}" aria-label="${cur.ar[i]}">${tag?`<span class="tag">${tag}</span>`:''}<span class="ar">${cur.ar[i]}</span><span class="la">${cur.la[i]}</span><span class="kb">${KB[i].toUpperCase()}</span></button>`}).join('');
+}
+
+function audio(){if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const body=ctx.createBiquadFilter();body.type='peaking';body.frequency.value=220;body.Q.value=1.2;body.gain.value=5;
+  const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=4200;
+  const out=ctx.createGain();out.gain.value=0.8;body.connect(lp).connect(out).connect(ctx.destination);ctx.dest=body}
+  if(ctx.state==='suspended')ctx.resume();return ctx}
+
+function pluck(freq){
+  const key=freq.toFixed(2);if(cache.has(key))return cache.get(key);
+  const sr=ctx.sampleRate,len=Math.floor(sr*2.6),buf=ctx.createBuffer(1,len,sr),d=buf.getChannelData(0);
+  const N=Math.max(2,Math.round(sr/freq)),ring=new Float32Array(N);
+  let prev=0;for(let i=0;i<N;i++){const r=Math.random()*2-1;prev=prev*0.55+r*0.45;ring[i]=prev}
+  const decay=0.9975-Math.min(0.004,freq/200000);let p=0;
+  for(let i=0;i<len;i++){const nx=(p+1)%N;const v=(ring[p]+ring[nx])*0.5*decay;d[i]=ring[p];ring[p]=v;p=nx}
+  let mx=0;for(let i=0;i<len;i++)mx=Math.max(mx,Math.abs(d[i]));for(let i=0;i<len;i++)d[i]=d[i]/(mx||1)*0.6;
+  cache.set(key,buf);return buf}
+
+function play(i){
+  audio();const f=cur.f*2**(cur.s[i]/24)*2**oct;
+  const src=ctx.createBufferSource();src.buffer=pluck(f);
+  const g=ctx.createGain();g.gain.setValueAtTime(1,ctx.currentTime);g.gain.setTargetAtTime(0,ctx.currentTime+2,0.15);
+  src.connect(g).connect(ctx.dest);src.start();src.stop(ctx.currentTime+2.6);
+  const el=keys.children[i];if(el){el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),160)}
+}
+
+function setMaqam(id){cur=M.find(m=>m.id===id)||cur;render();
+  try{localStorage.setItem('maqam',cur.id);history.replaceState(null,'','#'+cur.id)}catch(e){}}
+
+chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(b)setMaqam(b.dataset.id)});
+keys.addEventListener('pointerdown',e=>{const k=e.target.closest('.k');if(!k)return;e.preventDefault();play(+k.dataset.i)});
+keys.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.k')){e.preventDefault();play(+e.target.closest('.k').dataset.i)}});
+document.addEventListener('keydown',e=>{
+  if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
+  const k=e.key.toLowerCase();let i=KB.indexOf(k);if(i<0&&/^[1-8]$/.test(k))i=+k-1;
+  if(i>=0){play(i);e.preventDefault()}
+});
+let timers=[];
+function run(order){timers.forEach(clearTimeout);timers=order.map((i,n)=>setTimeout(()=>play(i),n*380))}
+document.getElementById('scaleUp').addEventListener('click',()=>{audio();run([0,1,2,3,4,5,6,7])});
+document.getElementById('scaleDown').addEventListener('click',()=>{audio();run([7,6,5,4,3,2,1,0])});
+const oo=document.getElementById('octOut');
+document.getElementById('octUp').addEventListener('click',()=>{oct=Math.min(2,oct+1);oo.textContent=oct>0?'+'+oct:oct});
+document.getElementById('octDown').addEventListener('click',()=>{oct=Math.max(-1,oct-1);oo.textContent=oct>0?'+'+oct:oct});
+window.addEventListener('hashchange',()=>setMaqam(location.hash.slice(1)));
+render();
+}
+</script>
+</body>
+</html>
